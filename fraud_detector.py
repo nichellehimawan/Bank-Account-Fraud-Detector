@@ -119,7 +119,7 @@ def similarity_batch(row):
 if uploaded and st.button("Check Batch"):
     inputs = pd.read_csv(uploaded)
     inputs["income"] = inputs.apply(normalize_income, axis=1)
-    inputs["name_email_similarity"] = inputs.apply(similarity_batch, axis=1)
+    inputs.insert(1, "name_email_similarity", inputs.apply(similarity_batch, axis=1))
     inputs.drop("name", axis=1, inplace=True)
     inputs.drop("email", axis=1, inplace=True)
     for col, encoder in le.items():
